@@ -50,7 +50,7 @@ export function WalletPage() {
       <h3
         data-testid="total-field"
       >
-        { expensesTotal }
+        { expensesTotal.toFixed(2) }
       </h3>
       <h3
         data-testid="header-currency-field"

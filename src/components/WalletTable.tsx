@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components";
+import { removeExpense } from "../redux/actions";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -22,16 +23,22 @@ const StyledTable = styled.table`
 
   button {
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #b60000c5;
     color: white;
     border: none;
     padding: 5px 10px;
     margin-right: 5px;
+    border-radius: 4px;
   }
 `;
 
 export function WalletTable() {
-  const { expenses } = useSelector((rootReducer) => rootReducer.wallet)
+  const { expenses } = useSelector((rootReducer) => rootReducer.wallet);
+  const dispatch = useDispatch();
+
+  const handleDelete = (expenseId) => {
+    dispatch(removeExpense(expenseId))
+  };
 
     return (
         <StyledTable>
@@ -54,14 +61,21 @@ export function WalletTable() {
                         <td>{expense.description}</td>
                         <td>{expense.tag}</td>
                         <td>{expense.method}</td>
-                        <td>{expense.value}</td>
-                        <td>{expense.currency}</td>
-                        <td>{expense.exchangeRates[expense.currency].ask}</td>
+                        <td>{parseFloat(expense.value).toFixed(2)}</td>
+                        <td>{expense.exchangeRates[expense.currency].name}</td>
+                        <td>{parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
                         <td>{(expense.value * expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
                         <td>BRL</td>
                         <td>
-                            <button onClick={() => (expense.id)}>Editar</button>
-                            <button onClick={() => (expense.id)}>Excluir</button>
+                            <button 
+                              onClick={() => (expense.id)}
+                            >Editar
+                            </button>
+                            <button
+                              onClick={ (e) => handleDelete(expense.id) }
+                              data-testid="delete-btn"
+                            >Excluir
+                            </button>
                         </td>
                     </tr>
                 ))}

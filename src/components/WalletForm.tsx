@@ -28,11 +28,12 @@ export function WalletForm() {
   const dispatch: Dispatch = useDispatch()
   const { currencies } = useSelector((rootReducer) => rootReducer.wallet)
   const { expenses } = useSelector((rootReducer) => rootReducer.wallet)
+  const { chaveQueSalvaOId } = useSelector((rootReducer) => rootReducer.wallet)
 
   const handleAddExpense = async (e) => {
     e.preventDefault();
         
-    const id = expenses.length;
+    const id = chaveQueSalvaOId;
     const value = valueInput;
     const description = descriptionInput;
     const currency = option;
