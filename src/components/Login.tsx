@@ -1,17 +1,18 @@
-import { styled } from "styled-components"
-import { useDispatch } from "react-redux";
-import { addEmail } from "../redux/actions";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import validedForm from "../utils/functions";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { styled } from 'styled-components'; // Correção 1
+import { addEmail } from '../redux/actions';
+
+import validedForm from '../utils/functions';
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: rgb(29,29,29);
-  background: linear-gradient(90deg, rgba(29,29,29,1) 0%, rgba(98,96,96,1) 100%);
+  background: rgb(29, 29, 29);
+  background: linear-gradient(90deg, rgba(29, 29, 29, 1) 0%, rgba(98, 96, 96, 1) 100%);
 `;
 
 const FormContainer = styled.form`
@@ -51,50 +52,51 @@ const Button = styled.button`
 `;
 
 export function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault()
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     dispatch(addEmail(email));
     navigate('/carteira');
-  }
+  };
 
-  const validForm = validedForm(email, password)
+  const validForm = validedForm(email, password);
 
   return (
     <Container>
       <FormContainer>
-        <label htmlFor="email">Email
+        <label htmlFor="email">
+          Email
           <Input
             type="text"
             name="email"
             id="email"
             data-testid="email-input"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            value={ email }
+            onChange={ (event) => setEmail(event.target.value) }
           />
         </label>
-        <label htmlFor="password">Senha
+        <label htmlFor="password">
+          Senha
           <Input
             type="text"
             name="password"
             id="password"
             data-testid="password-input"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            value={ password }
+            onChange={ (event) => setPassword(event.target.value) }
           />
         </label>
-        <label htmlFor="">
-          <Button
-            onClick={handleLogin}
-            disabled={!validForm}
-          >Entrar
-          </Button>
-        </label>
+        <Button
+          onClick={ handleLogin }
+          disabled={ !validForm }
+        >
+          Entrar
+        </Button>
       </FormContainer>
     </Container>
-  )
+  );
 }

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { applyMiddleware, legacy_createStore as createStore, Store } from 'redux';
 import { render } from '@testing-library/react';
 import thunk from 'redux-thunk';
-import rootReducer from '../../redux/reducers';
+import rootReducer from '../../redux/reducers/root-reducer';
 
 type Options = {
   initialEntries?: string[];

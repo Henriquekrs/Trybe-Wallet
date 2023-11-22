@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux"
-import styled from "styled-components";
-import { removeExpense } from "../redux/actions";
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { removeExpense } from '../redux/actions';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -32,54 +32,74 @@ const StyledTable = styled.table`
   }
 `;
 
+type ExpenseType = {
+  id: number,
+  value: string,
+  currency: string,
+  method: string,
+  tag: string,
+  description: string,
+  exchangeRates: any,
+};
+
 export function WalletTable() {
-  const { expenses } = useSelector((rootReducer) => rootReducer.wallet);
+  const { expenses } = useSelector((rootReducer: any) => rootReducer.wallet);
   const dispatch = useDispatch();
 
-  const handleDelete = (expenseId) => {
-    dispatch(removeExpense(expenseId))
+  const handleDelete = (expenseId: number) => {
+    dispatch(removeExpense(expenseId));
   };
 
-    return (
-        <StyledTable>
-            <thead>
-                <tr>
-                    <th>Descrição</th>
-                    <th>Tag</th>
-                    <th>Método de pagamento</th>
-                    <th>Valor</th>
-                    <th>Moeda</th>
-                    <th>Câmbio utilizado</th>
-                    <th>Valor convertido</th>
-                    <th>Moeda de conversão</th>
-                    <th>Editar/Excluir</th>
-                </tr>
-            </thead>
-            <tbody>
-                {expenses.map((expense) => (
-                    <tr key={expense.id}>
-                        <td>{expense.description}</td>
-                        <td>{expense.tag}</td>
-                        <td>{expense.method}</td>
-                        <td>{parseFloat(expense.value).toFixed(2)}</td>
-                        <td>{expense.exchangeRates[expense.currency].name}</td>
-                        <td>{parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
-                        <td>{(expense.value * expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
-                        <td>BRL</td>
-                        <td>
-                            <button 
-                              onClick={() => (expense.id)}
-                            >Editar
-                            </button>
-                            <button
-                              onClick={ (e) => handleDelete(expense.id) }
-                              data-testid="delete-btn"
-                            >Excluir
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </StyledTable>
-    )
+  return (
+    <StyledTable>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Tag</th>
+          <th>Método de pagamento</th>
+          <th>Valor</th>
+          <th>Moeda</th>
+          <th>Câmbio utilizado</th>
+          <th>Valor convertido</th>
+          <th>Moeda de conversão</th>
+          <th>Editar/Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        { expenses.map((expense: ExpenseType) => (
+          <tr key={ expense.id }>
+            <td>{ expense.description }</td>
+            <td>{ expense.tag }</td>
+            <td>{ expense.method }</td>
+            <td>{ parseFloat(expense.value).toFixed(2) }</td>
+            <td>{ expense.exchangeRates[expense.currency].name }</td>
+            <td>
+              { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2) }
+            </td>
+            <td>
+              {
+              (parseFloat(expense.value)
+                * parseFloat(expense.exchangeRates[expense.currency].ask))
+                .toFixed(2)
+              }
+            </td>
+            <td>BRL</td>
+            <td>
+              <button
+                onClick={ () => (expense.id) }
+              >
+                Editar
+              </button>
+              <button
+                onClick={ () => handleDelete(expense.id) }
+                data-testid="delete-btn"
+              >
+                Excluir
+              </button>
+            </td>
+          </tr>
+        )) }
+      </tbody>
+    </StyledTable>
+  );
 }

@@ -1,10 +1,9 @@
-import styled from "styled-components"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import rootReducer from "../redux/reducers/root-reducer"
-import { addOptions, requestSuccessful } from "../redux/actions"
-import { Dispatch } from "../type/types"
-import { resultApi } from "../utils/functions"
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { addOptions, requestSuccessful } from '../redux/actions';
+import { Dispatch, GlobalStateWallet } from '../type/types';
+import { resultApi } from '../utils/functions';
 
 const TagWalletForm = styled.div`
   align-items: center;
@@ -17,7 +16,7 @@ const TagWalletForm = styled.div`
     flex-direction: row;
     justify-content: space-around;
   }
-`
+`;
 
 export function WalletForm() {
   const [valueInput, setValueInput] = useState('');
@@ -25,15 +24,18 @@ export function WalletForm() {
   const [option, setOption] = useState('USD');
   const [methodInput, setMethodInput] = useState('Dinheiro');
   const [tagInput, setTagInput] = useState('Alimentação');
-  const dispatch: Dispatch = useDispatch()
-  const { currencies } = useSelector((rootReducer) => rootReducer.wallet)
-  const { expenses } = useSelector((rootReducer) => rootReducer.wallet)
-  const { chaveQueSalvaOId } = useSelector((rootReducer) => rootReducer.wallet)
+  const dispatch: Dispatch = useDispatch();
+  const { currencies } = useSelector(
+    (rootReducer: GlobalStateWallet) => rootReducer.wallet,
+  );
+  const { idToEdit } = useSelector(
+    (rootReducer: GlobalStateWallet) => rootReducer.wallet,
+  );
 
-  const handleAddExpense = async (e) => {
+  const handleAddExpense = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-        
-    const id = chaveQueSalvaOId;
+
+    const id = idToEdit;
     const value = valueInput;
     const description = descriptionInput;
     const currency = option;
@@ -41,7 +43,7 @@ export function WalletForm() {
     const tag = tagInput;
     const exchangeRates = await resultApi();
 
-    const expense = { //isto tem que ser igual ao do teste
+    const expense = {
       id,
       value,
       currency,
@@ -49,20 +51,22 @@ export function WalletForm() {
       tag,
       description,
       exchangeRates,
-    }
-    dispatch(requestSuccessful(expense))
-    setValueInput("")
-    setDescriptionInput("")
-  }
+    };
+
+    dispatch(requestSuccessful(expense));
+    setValueInput('');
+    setDescriptionInput('');
+  };
 
   useEffect(() => {
-    const xablau = async () => {
-      const variavel = await resultApi()
-      dispatch(addOptions(Object.keys(variavel)))
-    }
-    xablau()
-  }, [])
-  
+    const fetchData = async () => {
+      const result = await resultApi();
+      dispatch(addOptions(Object.keys(result)));
+    };
+
+    fetchData();
+  }, [dispatch]);
+
   return (
     <TagWalletForm>
       <form>
@@ -72,8 +76,8 @@ export function WalletForm() {
           type="text"
           name=""
           id="valor"
-          value={valueInput}
-          onChange={(event) => setValueInput(event.target.value)}
+          value={ valueInput }
+          onChange={ (event) => setValueInput(event.target.value) }
         />
         <label htmlFor="description">Descrição:</label>
         <input
@@ -81,31 +85,28 @@ export function WalletForm() {
           type="text"
           name=""
           id="description"
-          value={descriptionInput}
-          onChange={(event) => setDescriptionInput(event.target.value)}
+          value={ descriptionInput }
+          onChange={ (event) => setDescriptionInput(event.target.value) }
         />
         <select
           data-testid="currency-input"
           name=""
           id=""
-          value={option}
-          onChange={({target}) => setOption(target.value)}
+          value={ option }
+          onChange={ ({ target }) => setOption(target.value) }
         >
-          {currencies.map((options, index) => (
-            <option
-              key={index}
-              value={options}
-            >
-              {options}
+          { currencies.map((options, index) => (
+            <option key={ index } value={ options }>
+              { options }
             </option>
-          ))}
+          )) }
         </select>
         <select
           data-testid="method-input"
           name=""
           id=""
           value={ methodInput }
-          onChange={({target}) => setMethodInput(target.value)}
+          onChange={ ({ target }) => setMethodInput(target.value) }
         >
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
@@ -116,7 +117,7 @@ export function WalletForm() {
           name=""
           id=""
           value={ tagInput }
-          onChange={({target}) => setTagInput(target.value)}
+          onChange={ ({ target }) => setTagInput(target.value) }
         >
           <option value="Alimentacao">Alimentação</option>
           <option value="Lazer">Lazer</option>
@@ -124,18 +125,12 @@ export function WalletForm() {
           <option value="Transporte">Transporte</option>
           <option value="Saude">Saúde</option>
         </select>
-        <label
-        htmlFor=""
+        <button
+          onClick={ handleAddExpense }
         >
-          <button
-          onClick={handleAddExpense}
-          >
-            Adicionar despesa
-          </button>
-        </label>
+          Adicionar despesa
+        </button>
       </form>
     </TagWalletForm>
-  )
+  );
 }
-
-
