@@ -1,19 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { styled } from 'styled-components'; // Correção 1
+import styled from 'styled-components';
 import { addEmail } from '../redux/actions';
 import validedForm from '../utils/functions';
 import background from '../assets/foto_fundo.png';
-import logoMoney from '../assets/emoji_Money.svg';
-import logoTrybe from '../assets/Trybe.svg';
-import logoWallet from '../assets/Wallet.svg';
-import retangle from '../assets/Rectangle.svg';
+import logoTrybeWallet from '../assets/logo_Trybe_Wallet.svg';
 
 const Container = styled.div`
   width: 100vw; // 100% da largura da viewport
   height: 100vh; // 100% da altura da viewport
-  flex-shrink: 0;
   background: url(${background}), rgba(63, 210, 156);
   background-size: cover; // faz a imagem de fundo cobrir todo o elemento
   background-position: center; // centraliza a imagem de fundo
@@ -21,6 +17,14 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: 100vh;
+    background: url(${background}), rgba(63, 210, 156);
+    background-size: cover;
+    background-position: center;
+  }
 `;
 
 const FormContainer = styled.form`
@@ -29,124 +33,96 @@ const FormContainer = styled.form`
   align-items: center;
   border-radius: 10px;
   background: #FFF;
-  box-shadow: -4px 9px 13px 0px rgba(3, 107, 82, 0.30);
-  width: 525px;
-  height: 356px;
-  flex-shrink: 0;
-`;
+  box-shadow: -4px 9px 13px 0px rgba(57, 121, 106, 0.3);
+  width: 30vw;
+  height: 40vh;
 
-const HeaderForm = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 268.604px;
-  height: 56.142px;
-  flex-shrink: 0;
-  margin-top: 59px;
-
-  & img:nth-child(1) {
-    position: absolute;
-    width: 85.882px;
-    height: 33.795px;
-    flex-shrink: 0;
-    left: 61px;
-    margin-top: 21px;
-  }
-
-  img:nth-child(2) {
-    position: absolute;
-    width: 112.152px;
-    height: 26.756px;
-    flex-shrink: 0;
-    left: 151px;
-    margin-top: 21px;
-    margin-bottom: 7px;
-  }
-
-  img:nth-child(3) {
-    position: absolute;
-    width: 50.516px;
-    height: 50.516px;
-    flex-shrink: 0;
-    left: 4px;
-    top: 4px;
-  }
-
-  img:nth-child(4) {
-    position: absolute;
-    width: 55.497px;
-    height: 55.497px;
-    flex-shrink: 0;
+  @media (max-width: 768px) {
+    height: 50vh;
+    width: 95vw;
+    background-color: #ffffff;
+    box-shadow: -4px 9px 13px 0px rgba(34, 77, 67, 0.81);
   }
 `;
 
-const Input1 = styled.input`
+const Logo = styled.img`
+  width: 17vw;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+
+  @media (max-width: 768px) {
+    width: 70vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+  }
+`;
+
+const Input = styled.input`
   display: flex;
-  width: 300px;
-  height: 40px;
+  width: 17vw;
+  height: 5vh;
   padding: 0 15px;
-  flex-shrink: 0;
   border-radius: 5px;
-  border: 1px solid #003BE5;
-  background: #FFF; 
-  margin-top: 43px;
-
-  &::placeholder {
-    color: #003BE5;
-    font-family: Epilogue;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-`;
-
-const Input2 = styled.input`
-  display: flex;
-  width: 300px;
-  height: 40px;
-  padding: 0 15px;
-  flex-shrink: 0;
-  border-radius: 5px;
-  border: 1px solid #003BE5;
+  border: 2px solid #003BE5;
   background: #FFF;
-  margin-top: 10px;
+  margin-top: 5px;
+  font-size: 1vw;
 
   &::placeholder {
     color: #003BE5;
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 2vh;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-left: 15px;
-    margin-top: 13px;
-    margin-right: 18px;
-    margin-bottom: 13px;
+    font-weight: 800;
+    line-height: bold;
+  }
+
+  @media (max-width: 768px) {
+    width: 70vw;
+    height: 7vh;
+    padding: 0 15px;
+    font-size: 5vw;
+    border-radius: 5px;
+    border: 2px solid #003BE5;
+    background: none;
+    margin-top: 1vh;
   }
 `;
 
 const Button = styled.button`
-  margin-top: 10px;
-  width: 330px;
-  height: 40px;
-  flex-shrink: 0;
+  margin-top: 30px;
+  width: 17vw;
+  height: 6vh;
   border-radius: 5px;
-  border: 1px solid #003BE5;
+  border: none;
   background: #003BE5;
   color: #fff;
   cursor: pointer;
   color: #FFF;
   text-align: center;
   font-family: Epilogue;
-  font-size: 14px;
+  font-size: 2vh;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
+
+  @media (max-width: 768px) {
+    width: 70vw;
+    height: 7vh;
+    border-radius: 5px;
+    border: none;
+    background: #003BE5;
+    color: #FFF;
+    text-align: center;
+    font-family: Epilogue;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
 `;
 
-export function LoginPage() {
+function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -155,6 +131,7 @@ export function LoginPage() {
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(addEmail(email));
+    localStorage.setItem('user', JSON.stringify({ email }));
     navigate('/carteira');
   };
 
@@ -163,14 +140,9 @@ export function LoginPage() {
   return (
     <Container>
       <FormContainer>
-        <HeaderForm>
-          <img src={ logoTrybe } alt="logo_trybe" />
-          <img src={ logoWallet } alt="logo_wallet" />
-          <img src={ retangle } alt="retangulo_logo" />
-          <img src={ logoMoney } alt="logo_dinheiro" />
-        </HeaderForm>
+        <Logo src={ logoTrybeWallet } alt="logo_trybe" />
         <label htmlFor="email">
-          <Input1
+          <Input
             type="text"
             name="email"
             id="email"
@@ -181,7 +153,7 @@ export function LoginPage() {
           />
         </label>
         <label htmlFor="password">
-          <Input2
+          <Input
             type="text"
             name="password"
             id="password"
@@ -201,3 +173,5 @@ export function LoginPage() {
     </Container>
   );
 }
+
+export default LoginPage;

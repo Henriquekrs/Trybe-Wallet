@@ -3,89 +3,69 @@ import styled from 'styled-components';
 import { removeExpense } from '../redux/actions';
 import excluir from '../assets/Excluir.svg';
 import editar from '../assets/Editar.svg';
+import { ExpenseType } from '../type/types';
 
 const Container = styled.div`
-display: flex;
-width: 1155px;
-position: static;
-height: 464px;
-flex-shrink: 0;
-margin-top: 147px;
-border-radius: 10px;
-background: #003BE5;
-box-shadow: -4px 9px 13px 0px rgba(3, 107, 82, 0.30);
-align-items: flex-end;
-justify-content: center;
+  display: flex;
+  width: 85vw;
+  height: 67vh; // Tamanho fixo para o container da tabela
+  margin-top: 10vh;
+  border-radius: 1vw;
+  background: #003BE5;
+  box-shadow: 11px 10px 18px 3px rgb(8 116 90);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+`;
+
+const ScrollContainer = styled.div`
+  width: 80vw;
+  height: 35vh;
+  overflow-y: auto; 
 `;
 
 const StyledTable = styled.table`
-  width: 1040px;
-  height: 129px;
+  width: 100%; // Usa a largura total do ScrollContainer
+  background: none;
   border-collapse: separate;
-  border-spacing: 0 10px;
-  color: white;
+  border-spacing: 0 10px; // Espaçamento entre linhas
   position: relative;
-  top: -20px;
-  
 
   th {
-    border-left: 1px solid #FFF;
-    width: 110.933px;
-    color: #FFF;
-    text-align: center;
-    font-family: Epilogue;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 13px;
+    position: sticky; // Cabeçalho fixo ao rolar
+    top: 0; // Mantém o cabeçalho no topo
+    background: #003BE5; // Cor de fundo para o cabeçalho
+    color: white; // Cor do texto do cabeçalho
+    padding: 0 10px; // Adiciona espaçamento ao cabeçalho
+    font-family: Epilogue; // Define a fonte do texto
+    font-size: 1vw;
+    border-left: 1px solid #ffffff; // Adiciona borda à esquerda
 
     &:first-child {
-      border-left: none;
+      border: none;
     }
   }
 
   td {
-    width: 115.556px;
-    height: 40.923px;
-    flex-direction: column;
-    justify-content: center;
-    border-top: 1px solid #FFF;
-    color: #2FC18C;
-    text-align: center;
+    padding: 0.5vh 2vw;
     font-family: Epilogue;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 13px; /* 108.333% */ 
-  }
-
-  tbody tr:hover {
-    background-color: #003be52b;
+    font-size: 1vw;
+    color: #2FC18C;
+    border-bottom: 1px solid #2FC18C; // Adiciona borda na parte inferior
+    text-align: center;
   }
 
   button {
     cursor: pointer;
     border: none;
-    padding: 0;
     background-color: transparent;
 
     & img {
-      width: 15.318px;
-      height: 13.613px;
-      margin-right: 5px;
+      width: 2vw;
+      height: 2vw;
     }
   }
 `;
-
-type ExpenseType = {
-  id: number,
-  value: string,
-  currency: string,
-  method: string,
-  tag: string,
-  description: string,
-  exchangeRates: any,
-};
 
 export function WalletTable() {
   const { expenses } = useSelector((rootReducer: any) => rootReducer.wallet);
@@ -97,56 +77,58 @@ export function WalletTable() {
 
   return (
     <Container>
-      <StyledTable>
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-        </thead>
-        <tbody>
-          { expenses.map((expense: ExpenseType) => (
-            <tr key={ expense.id }>
-              <td>{ expense.description }</td>
-              <td>{ expense.tag }</td>
-              <td>{ expense.method }</td>
-              <td>{ parseFloat(expense.value).toFixed(2) }</td>
-              <td>{ expense.exchangeRates[expense.currency].name }</td>
-              <td>
-                { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2) }
-              </td>
-              <td>
-                {
-                (parseFloat(expense.value)
-                  * parseFloat(expense.exchangeRates[expense.currency].ask))
-                  .toFixed(2)
-                }
-              </td>
-              <td>BRL</td>
-              <td>
-                <button
-                  onClick={ () => (expense.id) }
-                >
-                  <img src={ editar } alt="" />
-                </button>
-                <button
-                  onClick={ () => handleDelete(expense.id) }
-                  data-testid="delete-btn"
-                >
-                  <img src={ excluir } alt="" />
-                </button>
-              </td>
+      <ScrollContainer>
+        <StyledTable>
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
             </tr>
-          )) }
-        </tbody>
-      </StyledTable>
+          </thead>
+          <tbody>
+            { expenses.map((expense: ExpenseType) => (
+              <tr key={ expense.id }>
+                <td>{ expense.description }</td>
+                <td>{ expense.tag }</td>
+                <td>{ expense.method }</td>
+                <td>{ parseFloat(expense.value).toFixed(2) }</td>
+                <td>{ expense.exchangeRates[expense.currency].name }</td>
+                <td>
+                  { parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2) }
+                </td>
+                <td>
+                  {
+                  (parseFloat(expense.value)
+                    * parseFloat(expense.exchangeRates[expense.currency].ask))
+                    .toFixed(2)
+                  }
+                </td>
+                <td>BRL</td>
+                <td>
+                  <button
+                    onClick={ () => (expense.id) }
+                  >
+                    <img src={ editar } alt="" />
+                  </button>
+                  <button
+                    onClick={ () => handleDelete(expense.id) }
+                    data-testid="delete-btn"
+                  >
+                    <img src={ excluir } alt="" />
+                  </button>
+                </td>
+              </tr>
+            )) }
+          </tbody>
+        </StyledTable>
+      </ScrollContainer>
     </Container>
   );
 }

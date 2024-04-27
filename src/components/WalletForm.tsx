@@ -7,15 +7,16 @@ import { resultApi } from '../utils/functions';
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 1037px;
-  height: 134px;
-  top: 147px;
+  width: 75vw;
+  height: 20vh;
+  top: 20vh;
   background: rgba(225, 229, 235, 0.49);
   position: absolute;
 `;
+
 const TagWalletForm = styled.div`
   display: flex;
   flex-direction: row;
@@ -23,36 +24,32 @@ const TagWalletForm = styled.div`
   align-content: space-between;
   align-items: center;
   justify-content: space-between;
-  width: 820px;
-  height: 87px;
-  flex-shrink: 0;
+  width: 52vw;
+  height: 11vh;
   color: #003BE5;
   font-family: Epilogue;
-  font-size: 14px;
+  font-size: 1vw;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-top: 39px;
 
   & input:nth-child(2) {
-    width: 158px;
-    height: 30px;
-    flex-shrink: 0;
+    width: 10vw;
+    height: 5vh;
     border-radius: 5px;
     border: 1px solid #003BE5;
   }
 
   input:nth-child(4) {
-    width: 228px;
-    height: 30px;
-    flex-shrink: 0;
+    width: 12vw;
+    height: 5vh;
     border-radius: 5px;
     border: 1px solid #003BE5;
   }
 
   select:nth-child(6) {
-    width: 91px;
-    height: 30px;
+    width: 4vw;
+    height: 5vh;
     border-radius: 5px;
     border: 1px solid #003BE5;
     color: #003BE5;
@@ -61,63 +58,54 @@ const TagWalletForm = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    --webkit-appearance: none;
-    
-    
-
-    & option {
-      display: flex;
-      align-items: center;
-    }
+    text-align: center;
   }
 
   select:nth-child(8) {
-    width: 228px;
-    height: 30px;
-    flex-shrink: 0;
+    width: 13vw;
+    height: 5vh;
     border-radius: 5px;
     border: 1px solid #003BE5;
     color: #003BE5;
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 1vw;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    --webkit-appearance: none;
+    padding: 0 1vw;
   }
 
   select:nth-child(10) {
-    width: 155px;
-    height: 30px;
-    flex-shrink: 0;
+    width: 13vw;
+    height: 5vh;
     border-radius: 5px;
     border: 1px solid #003BE5;
     color: #003BE5;
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 1vw;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    --webkit-appearance: none;
+    padding: 0 1vw;
   }
 `;
 
 const Button = styled.button`
   position: relative;
-  width: 330px;
-  height: 40px;
-  top: 51px;
-  flex-shrink: 0;
+  width: 19vw;
+  height: 6vh;
+  top: 35vh;
   border-radius: 5px;
   background: #2FC18C;
   color: #FFF;
   border: none;
   text-align: center;
   font-family: Epilogue;
-  font-size: 14px;
+  font-size: 1vw;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.25);
 `;
 
 export function WalletForm() {
@@ -170,72 +158,74 @@ export function WalletForm() {
   }, [dispatch]);
 
   return (
-    <Container>
-      <TagWalletForm>
-        <label htmlFor="valor">Valor:</label>
-        <input
-          data-testid="value-input"
-          type="text"
-          name=""
-          id="valor"
-          value={ valueInput }
-          onChange={ (event) => setValueInput(event.target.value) }
-        />
-        <label htmlFor="description">Descrição da despesa</label>
-        <input
-          data-testid="description-input"
-          type="text"
-          name=""
-          id="description"
-          value={ descriptionInput }
-          onChange={ (event) => setDescriptionInput(event.target.value) }
-        />
-        <label htmlFor="currency">Moeda</label>
-        <select
-          data-testid="currency-input"
-          name=""
-          id="currency"
-          value={ option }
-          onChange={ ({ target }) => setOption(target.value) }
-        >
-          { currencies.map((options, index) => (
-            <option key={ index } value={ options }>
-              { options }
-            </option>
-          )) }
-        </select>
-        <label htmlFor="method">Método de pagamento</label>
-        <select
-          data-testid="method-input"
-          name=""
-          id="method"
-          value={ methodInput }
-          onChange={ ({ target }) => setMethodInput(target.value) }
-        >
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Cartão de crédito">Cartão de crédito</option>
-          <option value="Cartão de débito">Cartão de débito</option>
-        </select>
-        <label htmlFor="tag">Categoria da despesa</label>
-        <select
-          data-testid="tag-input"
-          name=""
-          id="tag"
-          value={ tagInput }
-          onChange={ ({ target }) => setTagInput(target.value) }
-        >
-          <option value="Alimentacao">Alimentação</option>
-          <option value="Lazer">Lazer</option>
-          <option value="Trabalho">Trabalho</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Saude">Saúde</option>
-        </select>
-      </TagWalletForm>
+    <>
+      <Container>
+        <TagWalletForm>
+          <label htmlFor="valor">Valor:</label>
+          <input
+            data-testid="value-input"
+            type="text"
+            name=""
+            id="valor"
+            value={ valueInput }
+            onChange={ (event) => setValueInput(event.target.value) }
+          />
+          <label htmlFor="description">Descrição da despesa</label>
+          <input
+            data-testid="description-input"
+            type="text"
+            name=""
+            id="description"
+            value={ descriptionInput }
+            onChange={ (event) => setDescriptionInput(event.target.value) }
+          />
+          <label htmlFor="currency">Moeda</label>
+          <select
+            data-testid="currency-input"
+            name=""
+            id="currency"
+            value={ option }
+            onChange={ ({ target }) => setOption(target.value) }
+          >
+            { currencies.map((options, index) => (
+              <option key={ index } value={ options }>
+                { options }
+              </option>
+            )) }
+          </select>
+          <label htmlFor="method">Método de pagamento</label>
+          <select
+            data-testid="method-input"
+            name=""
+            id="method"
+            value={ methodInput }
+            onChange={ ({ target }) => setMethodInput(target.value) }
+          >
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
+          </select>
+          <label htmlFor="tag">Categoria da despesa</label>
+          <select
+            data-testid="tag-input"
+            name=""
+            id="tag"
+            value={ tagInput }
+            onChange={ ({ target }) => setTagInput(target.value) }
+          >
+            <option value="Alimentacao">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saude">Saúde</option>
+          </select>
+        </TagWalletForm>
+      </Container>
       <Button
         onClick={ handleAddExpense }
       >
         Adicionar despesa
       </Button>
-    </Container>
+    </>
   );
 }

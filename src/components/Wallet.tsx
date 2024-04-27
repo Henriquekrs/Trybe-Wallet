@@ -5,165 +5,109 @@ import { GlobalStateUser, GlobalStateWallet } from '../type/types';
 import { WalletForm } from './WalletForm';
 import { WalletTable } from './WalletTable';
 import background from '../assets/foto_fundo.png';
-import logoMoney from '../assets/emoji_Money.svg';
-import logoTrybe from '../assets/Trybe.svg';
-import logoWallet from '../assets/Wallet.svg';
-import retangle from '../assets/Rectangle.svg';
+import logoTrybeWallet from '../assets/logo_Trybe_Wallet.svg';
 import logoCoin from '../assets/Moedas.svg';
 import logoAvatar from '../assets/Vector.svg';
 
 const Container = styled.div`
   width: 100vw; // 100% da largura da viewport
   height: 100vh; // 100% da altura da viewport
-  max-width: 100%;
-  max-height: 965.393px;
   background: url(${background}), rgba(63, 210, 156);
   background-size: cover; // faz a imagem de fundo cobrir todo o elemento
   background-position: center; // centraliza a imagem de fundo
   mix-blend-mode: luminosity;
   display: flex;
-  flex-direction: column;
   position: absolute;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const TagWallet = styled.div`
   display: flex;
   position: absolute;
   flex-direction: row;
-  justify-items: center;
   justify-content: space-around;
   align-items: center;
-  width: 1037px;
-  height: 482px;
-  top: -105px;
-  border-radius: 0 0 10px 10px;
+  width: 75vw;
+  height: 65vh;
+  top: -10vh;
+  border-radius: 1vw;
   background: #FFF;
   box-shadow: -4px 9px 13px 0px rgba(5, 18, 54, 0.40);
+  align-items: flex-start;
 
   h3:nth-child(3) {
     color: #003BE5;
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 1vw;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin-left: 0.3vw;
   }
 
   h3:nth-child(4) {
     color: #003BE5;
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 1vw;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-left: 4px;
+    margin-left: 0.3vw;
   }
 
   h3:nth-child(5) {
-    width: 123px;
     color: #2FC18C;
     font-family: Epilogue;
-    font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
 `;
 
-const HeaderLogo = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-items: center;
-  width: 250.185px;
-  height: 52.293px;
-  flex-shrink: 0;
-  left: 70px;
-  top: -63px;
-
-  & img:nth-child(1) {
-    position: absolute;
-    width: 85.882px;
-    height: 33.795px;
-    flex-shrink: 0;
-    left: 61px;
-    margin-top: 21px;
-  }
-
-  img:nth-child(2) {
-    position: absolute;
-    width: 112.152px;
-    height: 26.756px;
-    flex-shrink: 0;
-    left: 151px;
-    margin-top: 21px;
-    margin-bottom: 7px;
-  }
-
-  img:nth-child(3) {
-    position: absolute;
-    width: 50.516px;
-    height: 50.516px;
-    flex-shrink: 0;
-    left: 4px;
-    top: 4px;
-  }
-
-  img:nth-child(4) {
-    position: absolute;
-    width: 55.497px;
-    height: 55.497px;
-    flex-shrink: 0;
-  }
+const Logo = styled.img`
+  width: 17vw;
+  margin-top: 15vh;
 `;
 
 const TotalDispesas = styled.div`
   position: relative;
   display: flex;
-  color: #003BE5;
-  width: 270px;
-  height: 28.705px;
-  flex-shrink: 0;
+  color: #173cad;
+  width: 18vw;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  top: -47px;
-  left: 44px;
+  margin-top: 18vh;
 
   & h3:nth-child(2) {
-    width: 138px;
     color: #003BE5;
+
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 1.8vh;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-left: 8.29px;
+    margin-left: 0.5vw;
   }
 `;
 
 const Profile = styled.div`
   position: relative;
   display: flex;
-  width: 157px;
-  height: 25.21px;
-  flex-shrink: 0;
   flex-direction: row;
   align-items: center;
-  margin-right: 104px;
-  top: -47px;
+  margin-top: 18vh;
 
   & h3:nth-child(2) {
-    width: 123px;
     color: #2FC18C;
     font-family: Epilogue;
-    font-size: 14px;
+    font-size: 1vw;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-left: 8.75px;
+    margin-left: 0.3vw;
   }
 `;
 
@@ -195,12 +139,7 @@ export function WalletPage() {
   return (
     <Container>
       <TagWallet>
-        <HeaderLogo>
-          <img src={ logoTrybe } alt="logo_trybe" />
-          <img src={ logoWallet } alt="logo_wallet" />
-          <img src={ retangle } alt="retangulo_logo" />
-          <img src={ logoMoney } alt="logo_dinheiro" />
-        </HeaderLogo>
+        <Logo src={ logoTrybeWallet } alt="logo_trybe" />
         <TotalDispesas>
           <img src={ logoCoin } alt="" />
           <h3>Total de despesas:</h3>
