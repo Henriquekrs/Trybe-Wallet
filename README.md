@@ -6,10 +6,10 @@ Este projeto foi desenvolvido durante minha formação no módulo de front-end n
 
 ## Principais linguagens e tecnologias utilizadas
 
-- **TypeScript**: Descrição breve de como foi utilizada.
-- **Redux**: Descrição breve de como foi utilizada.
-- **React**: Descrição breve de como foi utilizada.
-- **CSS**: Descrição breve de como foi utilizada.
+- **TypeScript**: Tipagem de funções e estados globais garantindo os tipos de entrada e saída de valores, antecipando possíveis erros ou bugs.
+- **Redux**: Fácil gerenciamento e manipulação de valores por meio de actions e dispatch.
+- **React**: Gerenciamento de rotas por meio do react router dom.
+- **CSS**: Estilização usando styled component.
 
 ## Instruções de instalação e uso
 
