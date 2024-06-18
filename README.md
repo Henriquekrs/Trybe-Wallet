@@ -15,7 +15,6 @@ Este projeto foi desenvolvido durante minha formação no módulo de front-end n
 
 ### Pré-requisitos
 
-Liste os pré-requisitos necessários para rodar o projeto. Por exemplo:
 - **Node.js** (versão X.X.X)
 - **npm** (versão X.X.X)
 
@@ -104,7 +103,6 @@ Passos para iniciar e usar o projeto:
 
 ### Exemplos de uso
 
-Adicione exemplos práticos de como utilizar a aplicação. Por exemplo:
 - Para fazer o login, insira um email de teste seguindo a seguinte estrutura => (teste@teste.com) A senha deve conter 6 ou mais caracteres sendo um maiúsculo.
 - Para adicionar uma despesa insira uma descrição, selecione uma categoria, insira um valor, selecione método de pagamento e valor.
 - Para editar uma despesa clique no botão de editar e insira um novo valor.
