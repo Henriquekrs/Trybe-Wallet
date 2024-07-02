@@ -18,6 +18,16 @@ Este projeto foi desenvolvido durante minha formação no módulo de front-end n
 
 ## Instruções de instalação e uso
 
+### Uso
+
+- Acesse o link: [TrybeWallet](https://trybe-wallet-dun.vercel.app/)
+
+### Exemplos de uso
+
+- Para fazer o login, insira um email de teste seguindo a seguinte estrutura => (teste@teste.com) A senha deve conter 6 ou mais caracteres, sendo um maiúsculo.
+- Para adicionar uma despesa insira uma descrição, selecione uma categoria, insira um valor, selecione método de pagamento e valor.
+- Para editar uma despesa clique no botão de editar e insira um novo valor.
+- Para excluir uma despesa clique o botão de excluir.
 
 ### Pré-requisitos
 
@@ -112,30 +122,6 @@ Este projeto foi desenvolvido durante minha formação no módulo de front-end n
     ```bash
     npm install
     ```
-
-
-### Uso
-
-
-Passos para iniciar e usar o projeto:
-1. Inicie o servidor de desenvolvimento:
-    ```bash
-    npm run dev
-    ```
-2. Abra seu navegador e acesse:
-    ```
-    http://localhost:3000
-    ```
-
-
-### Exemplos de uso
-
-
-- Para fazer o login, insira um email de teste seguindo a seguinte estrutura => (teste@teste.com) A senha deve conter 6 ou mais caracteres, sendo um maiúsculo.
-- Para adicionar uma despesa insira uma descrição, selecione uma categoria, insira um valor, selecione método de pagamento e valor.
-- Para editar uma despesa clique no botão de editar e insira um novo valor.
-- Para excluir uma despesa clique o botão de excluir.
-
 
 ## Contato
 
