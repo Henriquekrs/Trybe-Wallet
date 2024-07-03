@@ -4,7 +4,7 @@
 ## Do que se trata esse projeto
 
 
-Este projeto foi desenvolvido durante minha formação no módulo de front-end na trybe. A proposta da aplicação e de uma carteira digital onde o cliente possa armazenar e organizar seus gastos, custos, despesas… Oferecendo um detalhamento maior como, por exemplo, método de pagamento, a moeda utilizada na transação, descrição e categoria. Esta aplicação serviu para colocar em prática e aprimorar meus conhecimentos em linguagens como TypeScript e gerenciadores de estado como Redux. Algumas melhorias para esta aplicação já estão em desenvolvimento como visualização de gráficos mostrando o balanço de entrada e saída, gasto médio por período semanal, mensal e anual… Entre outros.
+Este projeto foi desenvolvido durante minha formação no módulo de front-end na [Trybe](https://www.betrybe.com/). A proposta da aplicação e de uma carteira digital onde o cliente possa armazenar e organizar seus gastos, custos, despesas… Oferecendo um detalhamento maior como, por exemplo, método de pagamento, a moeda utilizada na transação, descrição e categoria. Esta aplicação serviu para colocar em prática e aprimorar meus conhecimentos em linguagens como TypeScript e gerenciadores de estado como Redux. Algumas melhorias para esta aplicação já estão em desenvolvimento como visualização de gráficos mostrando o balanço de entrada e saída, gasto médio por período semanal, mensal e anual… Entre outros.
 
 
 ## Principais linguagens e tecnologias utilizadas
